@@ -344,10 +344,17 @@ body {
       }
 
       .control-btn {
-        color: var(--text-secondary);
+        color: var(--text-color) !important;
+        background: none;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all var(--transition-speed);
         
         &:hover {
-          color: var(--text-color);
+          transform: scale(1.1);
+          color: var(--primary-color) !important;
         }
       }
       
@@ -374,6 +381,7 @@ body {
           
           i {
             font-size: 20px;
+            color: var(--text-color) !important;
           }
           
           &:hover {
