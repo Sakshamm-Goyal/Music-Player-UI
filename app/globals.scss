@@ -290,21 +290,27 @@ body {
       align-items: center;
       justify-content: space-between;
       padding: 0 16px;
-      gap: 16px;
       
       button {
         background: none;
         border: none;
-        color: var(--text-color) !important;
         cursor: pointer;
-        padding: 8px;
         transition: all var(--transition-speed);
-        display: flex;
-        align-items: center;
-        justify-content: center;
         
-        &:hover {
-          transform: scale(1.1);
+        &.control-btn {
+          color: #FFFFFF;
+          font-size: 20px;
+          padding: 8px;
+          
+          i {
+            display: block;
+            color: #FFFFFF;
+          }
+          
+          &:hover {
+            transform: scale(1.1);
+            color: var(--primary-color);
+          }
         }
         
         &.play-pause-btn {
@@ -317,26 +323,39 @@ body {
           justify-content: center;
           
           i {
+            display: block;
             font-size: 20px;
-            color: var(--text-color) !important;
+            color: #FFFFFF;
           }
           
           &:hover {
-            background-color: lighten(#1DB954, 5%);
+            transform: scale(1.1);
+            background-color: #1ed760;
           }
         }
         
-        &.control-btn {
-          color: var(--text-secondary) !important;
-          font-size: 18px;
-          
-          &:hover {
-            color: var(--text-color) !important;
-          }
+        &.options-btn {
+          color: #FFFFFF;
           
           i {
-            color: inherit;
+            display: block;
+            color: #FFFFFF;
           }
+          
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
+      
+      .volume-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #FFFFFF;
+        
+        i {
+          color: #FFFFFF;
         }
       }
     }
