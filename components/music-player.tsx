@@ -134,8 +134,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
         <div className="main-controls">
           <Dropdown>
-            <Dropdown.Toggle className="options-btn">
-              <i className="fas fa-ellipsis-h"></i>
+            <Dropdown.Toggle className="options-btn" style={{ color: '#FFFFFF' }}>
+              <i className="fas fa-ellipsis-h" style={{ color: '#FFFFFF' }}></i>
             </Dropdown.Toggle>
             <Dropdown.Menu align="end">
               <Dropdown.Item onClick={handleFavoriteClick}>
@@ -151,20 +151,30 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
             </Dropdown.Menu>
           </Dropdown>
 
-          <button onClick={onPrevious} className="control-btn">
-            <i className="fas fa-step-backward"></i>
+          <button onClick={onPrevious} className="control-btn" style={{ color: '#FFFFFF' }}>
+            <i className="fas fa-step-backward" style={{ color: '#FFFFFF' }}></i>
           </button>
 
-          <button onClick={() => setIsPlaying(!isPlaying)} className="play-pause-btn">
-            <i className={`fas ${isPlaying ? "fa-pause" : "fa-play"}`}></i>
+          <button 
+            onClick={() => setIsPlaying(!isPlaying)} 
+            className="play-pause-btn" 
+            style={{ backgroundColor: '#1DB954', color: '#FFFFFF' }}
+          >
+            <i 
+              className={`fas ${isPlaying ? "fa-pause" : "fa-play"}`} 
+              style={{ color: '#FFFFFF' }}
+            ></i>
           </button>
 
-          <button onClick={onNext} className="control-btn">
-            <i className="fas fa-step-forward"></i>
+          <button onClick={onNext} className="control-btn" style={{ color: '#FFFFFF' }}>
+            <i className="fas fa-step-forward" style={{ color: '#FFFFFF' }}></i>
           </button>
 
           <div className="volume-control">
-            <i className={`fas fa-volume-${volume === 0 ? 'mute' : volume < 0.5 ? 'down' : 'up'}`}></i>
+            <i 
+              className={`fas fa-volume-${volume === 0 ? 'mute' : volume < 0.5 ? 'down' : 'up'}`}
+              style={{ color: '#FFFFFF' }}
+            ></i>
             <input
               type="range"
               min="0"
