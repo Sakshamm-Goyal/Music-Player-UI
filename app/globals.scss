@@ -290,81 +290,18 @@ body {
       align-items: center;
       justify-content: space-between;
       padding: 0 16px;
-      
-      .dropdown {
-        position: relative;
-        
-        .options-btn {
-          color: var(--text-secondary);
-          background: none;
-          border: none;
-          padding: 8px;
-          cursor: pointer;
-          transition: color var(--transition-speed);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          
-          &:hover, &:focus, &:active, &[aria-expanded="true"] {
-            color: var(--text-color);
-          }
-          
-          &::after {
-            display: none;
-          }
-        }
-        
-        .dropdown-menu {
-          background-color: var(--background-light);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 4px;
-          padding: 8px 0;
-          min-width: 180px;
-          margin-top: 4px;
-          
-          .dropdown-item {
-            color: var(--text-secondary);
-            padding: 8px 16px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            
-            &:hover {
-              background-color: rgba(255, 255, 255, 0.1);
-              color: var(--text-color);
-            }
-            
-            i {
-              width: 16px;
-              text-align: center;
-            }
-          }
-        }
-      }
-
-      .control-btn {
-        color: var(--text-color) !important;
-        background: none;
-        border: none;
-        padding: 8px;
-        cursor: pointer;
-        font-size: 18px;
-        transition: all var(--transition-speed);
-        
-        &:hover {
-          transform: scale(1.1);
-          color: var(--primary-color) !important;
-        }
-      }
+      gap: 16px;
       
       button {
         background: none;
         border: none;
-        color: var(--text-color);
+        color: var(--text-color) !important;
         cursor: pointer;
         padding: 8px;
         transition: all var(--transition-speed);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         
         &:hover {
           transform: scale(1.1);
@@ -389,11 +326,16 @@ body {
           }
         }
         
-        &.favorite-btn {
-          color: var(--text-secondary);
+        &.control-btn {
+          color: var(--text-secondary) !important;
+          font-size: 18px;
           
-          &.active {
-            color: var(--primary-color);
+          &:hover {
+            color: var(--text-color) !important;
+          }
+          
+          i {
+            color: inherit;
           }
         }
       }
