@@ -114,6 +114,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
     })
   }
 
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60)
+    const remainingSeconds = Math.round(seconds % 60)
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
+  }
+
   return (
     <div className="now-playing-section">
       <div className="song-details">
@@ -129,6 +135,16 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
         <div className="progress-container">
           <div className="progress-bar" ref={progressRef} onClick={handleProgressClick}>
             <div className="progress" style={{ width: `${(currentTime / duration) * 100 || 0}%` }}></div>
+          </div>
+          <div className="time-display" style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            color: '#B3B3B3',
+            fontSize: '12px',
+            marginTop: '4px'
+          }}>
+            <span>{formatTime(currentTime)}</span>
+            <span>{formatTime(duration)}</span>
           </div>
         </div>
 
@@ -227,17 +243,54 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
             </svg>
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" viewBox="0 0 16 16">
-              <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
-              <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
-              <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7.5 4v8a.5.5 0 0 1-.783.411l-4-2.5a.5.5 0 0 1 0-.822l4-2.5a.5.5 0 0 1 .783.411z"/>
-            </svg>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '8px',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            padding: '4px 12px',
+            borderRadius: '20px',
+          }}>
+            <button
+              onClick={() => {
+                const newVolume = volume === 0 ? 1 : 0;
+                setVolume(newVolume);
+                if (audioRef.current) {
+                  audioRef.current.volume = newVolume;
+                }
+              }}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              {volume === 0 ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" viewBox="0 0 16 16">
+                  <path d="M6.717 3.55A.5.5 0 0 1 7.5 4v8a.5.5 0 0 1-.783.411l-4-2.5a.5.5 0 0 1 0-.822l4-2.5a.5.5 0 0 1 .783.411zm7.261 1.54a.5.5 0 0 1 0 .706L12.5 7.25l1.478 1.478a.5.5 0 1 1-.707.707L11.793 7.957l-1.478 1.478a.5.5 0 1 1-.707-.707L11.086 7.25 9.608 5.772a.5.5 0 1 1 .707-.707l1.478 1.478 1.478-1.478a.5.5 0 0 1 .707 0z"/>
+                </svg>
+              ) : volume < 0.5 ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" viewBox="0 0 16 16">
+                  <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zm3.025 4a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/>
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" viewBox="0 0 16 16">
+                  <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+                  <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+                  <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707z"/>
+                  <path d="M6.717 3.55A.5.5 0 0 1 7.5 4v8a.5.5 0 0 1-.783.411l-4-2.5a.5.5 0 0 1 0-.822l4-2.5a.5.5 0 0 1 .783.411z"/>
+                </svg>
+              )}
+            </button>
             <input
               type="range"
               min="0"
               max="1"
-              step="0.1"
+              step="0.01"
               value={volume}
               onChange={(e) => {
                 const newVolume = parseFloat(e.target.value)
@@ -249,10 +302,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({
               style={{
                 width: '80px',
                 height: '4px',
-                background: 'rgba(255, 255, 255, 0.3)',
+                background: `linear-gradient(to right, #FFFFFF ${volume * 100}%, rgba(255, 255, 255, 0.3) ${volume * 100}%)`,
                 borderRadius: '2px',
                 outline: 'none',
                 WebkitAppearance: 'none',
+                cursor: 'pointer',
               }}
             />
           </div>
